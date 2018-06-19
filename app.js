@@ -58,7 +58,7 @@ app.post('/:spreadsheetId/:range/append', (req,res) => {
       requestBody: content,
       auth: jwt
     }, (err, data) => {
-      console.log(err || data);
+      //console.log(err || data);
       if(err) {
         res.status(400);
       }
