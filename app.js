@@ -4,7 +4,7 @@ const {google} = require('googleapis');
 const nconf = require('nconf');
 const path = require('path');
 
-const credentials = require('./test-credentials.json');
+//const credentials = require('./test-credentials.json');
 
 const client_email = process.env.GOOGLE_CLIENT_EMAIL;
 const private_key = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g,'\n');
