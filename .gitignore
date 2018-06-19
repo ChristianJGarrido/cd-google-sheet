@@ -38,6 +38,7 @@ build/Release
 /node_modules/*
 !/node_modules/lp_js_logger
 jspm_packages
+package-lock.json
 
 # Optional npm cache directory
 .npm
