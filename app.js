@@ -3,6 +3,7 @@ require('dotenv').config();
 const {google} = require('googleapis');
 const nconf = require('nconf');
 const path = require('path');
+const CircularJSON = require('circular-json');
 
 //const credentials = require('./test-credentials.json');
 
@@ -44,9 +45,9 @@ app.post(sub + ':spreadsheetId/:range/append', (req,res) => {
   var content = req.body ? req.body : undefined;
   jwt.authorize((err, data) => {
     if (err) {
-      //console.error(err);
+      console.error(CircularJSON.stringify(err));
       res.status(400);
-      res.send(err.data);
+      res.send(err.message)
     } else {
     //console.log('You have been successfully authenticated: ', data);
   
