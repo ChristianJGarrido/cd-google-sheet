@@ -9,6 +9,7 @@ const path = require('path');
 const client_email = process.env.GOOGLE_CLIENT_EMAIL;
 const private_key = process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g,'\n');
 const sheetId = process.env.SHEET_ID;
+const sub = process.env.SUB || '/';
 console.log(private_key);
 
 // Create JWT auth object
@@ -30,8 +31,10 @@ const fs = require('fs');
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
+app.use(sub + 'healthcheck', require('express-healthcheck')());
 
-app.post('/:spreadsheetId/:range/append', (req,res) => {
+
+app.post(sub + ':spreadsheetId/:range/append', (req,res) => {
   //var private_key = fs.readFileSync('idp/private_key_idp.pem');
   //var companyBranch = req.query.companyBranch ? req.query.companyBranch : '';
   //console.log('jwt');
@@ -67,7 +70,7 @@ app.post('/:spreadsheetId/:range/append', (req,res) => {
   });
 });
 
-app.get('/', (req, res) => {
+app.get(sub, (req, res) => {
   res.header("Access-Control-Allow-Origin", '*');
   res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
   res.header("Access-Control-Allow-Headers", 'Content-Type, Authorization, Content-Length, X-Requested-With');
