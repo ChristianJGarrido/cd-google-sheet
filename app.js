@@ -45,28 +45,31 @@ app.post(sub + ':spreadsheetId/:range/append', (req,res) => {
   jwt.authorize((err, data) => {
     if (err) {
       console.error(err);
-    }
+      res.status(400);
+      res.send(err);
+    } else {
     //console.log('You have been successfully authenticated: ', data);
   
     // Get Google Admin API
-    const sheets = google.sheets({
-      version: 'v4'
-    });
-  
-    // Delete group
-    sheets.spreadsheets.values.append({
-      spreadsheetId,
-      range: range,
-      valueInputOption: 'USER_ENTERED',
-      requestBody: content,
-      auth: jwt
-    }, (err, data) => {
-      //console.log(err || data);
-      if(err) {
-        res.status(400);
-      }
-      res.send(data.data);
-    });
+      const sheets = google.sheets({
+        version: 'v4'
+      });
+    
+      // Delete group
+      sheets.spreadsheets.values.append({
+        spreadsheetId,
+        range: range,
+        valueInputOption: 'USER_ENTERED',
+        requestBody: content,
+        auth: jwt
+      }, (err, data) => {
+        //console.log(err || data);
+        if(err) {
+          res.status(400);
+        }
+        res.send(data.data);
+      });
+    }
   });
 });
 
