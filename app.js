@@ -44,9 +44,9 @@ app.post(sub + ':spreadsheetId/:range/append', (req,res) => {
   var content = req.body ? req.body : undefined;
   jwt.authorize((err, data) => {
     if (err) {
-      console.error(err);
+      //console.error(err);
       res.status(400);
-      res.send(err);
+      res.send(err.message);
     } else {
     //console.log('You have been successfully authenticated: ', data);
   
