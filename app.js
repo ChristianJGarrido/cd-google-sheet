@@ -47,7 +47,7 @@ app.post(sub + ':spreadsheetId/:range/append', (req,res) => {
     if (err) {
       console.error(CircularJSON.stringify(err));
       res.status(400);
-      res.send(err.message)
+      res.send(err.response.data)
     } else {
     //console.log('You have been successfully authenticated: ', data);
   
